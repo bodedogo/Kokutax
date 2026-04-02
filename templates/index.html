@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kokutax|Home</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="">Kokutax</a>
+    </nav>
+    <main>
+      <section class="calculatorSect">
+        <form method="POST" action="/calcular">
+          <label for="salario">Salário mensal (¥ - ienes)</label>
+            <br>
+          <input
+            type="number" id="salario" name="salario" placeholder="Ex: 250000" required min="0" step="1"
+          />
+          <button type="submit">Calcular impostos</button>
+
+          <small>Digite o valor bruto mensal em ienes</small>
+        </form>
+
+        <div id="showResults">
+            
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
