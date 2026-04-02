@@ -4,29 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kokutax|Home</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <nav>
-      <a href="">Kokutax</a>
+      <h2>KOKUTAX</h2>
     </nav>
+
     <main>
+
       <section class="calculatorSect">
         <form method="POST" action="/calcular">
           <label for="salario">Salário mensal (¥ - ienes)</label>
-            <br>
-          <input
-            type="number" id="salario" name="salario" placeholder="Ex: 250000" required min="0" step="1"
-          />
-          <button type="submit">Calcular impostos</button>
+          <br />
+          <div id="submitInput">
+            <input
+              type="number"
+              id="salario"
+              name="salario"
+              placeholder="Ex: 150000"
+              required
+              min="0"
+              step="1"
+            />
+            <button type="submit">Calcular</button>
+          </div>
 
           <small>Digite o valor bruto mensal em ienes</small>
         </form>
+        <br />
 
         <div id="showResults">
-            
+          {% if salario_anual > 0 %}
+          <h2>Resultados</h2>
+
+          <p>
+            <abbr title="Seu salário mensal x 12">Salário anual</abbr>: {{
+            "{:,.2f}".format(salario_anual) }} ¥
+          </p>
+          <p>Dedução do salário: {{ "{:,.2f}".format(deducao_salario) }} ¥</p>
+          <p>
+            Salário após dedução: {{ "{:,.2f}".format(salario_apos_deducao) }} ¥
+          </p>
+
+          <p>Previdência: {{ "{:,.2f}".format(previdencia) }} ¥</p>
+          <p>Seguro de saúde: {{ "{:,.2f}".format(seguro_de_saude) }} ¥</p>
+          <p>Seguro desemprego: {{ "{:,.2f}".format(seguro_desemprego) }} ¥</p>
+
+          <p>Dedução básica: {{ "{:,.2f}".format(deducao_basica) }} ¥</p>
+          <p>Renda tributável: {{ "{:,.2f}".format(renda_tributavel) }} ¥</p>
+
+          <p>Imposto: {{ "{:,.2f}".format(imposto) }} ¥</p>
+          <p>Imposto de residência: {{ "{:,.2f}".format(residencia) }} ¥</p>
+          {% endif %} {% if erro %}
+          <p style="color: red">{{ erro }}</p>
+          {% endif %}
         </div>
+      </section>
+
+      <section class="userConfigSect">
+
+        <select name="cidade">
+            <option value="tokyo">Tokyo</option>
+            <option value="osaka">Osaka</option>
+            <option value="kyoto">Kyoto</option>
+        </select>
+
+        <select name="visto">
+            <option value="kosei">Kosei</option>
+            <option value="freelancer">Freelancer</option>
+
+            
+        </select>
+        <button id="saveUserBtn">Salvar</button>
       </section>
     </main>
   </body>

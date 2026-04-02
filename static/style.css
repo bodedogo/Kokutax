@@ -1,0 +1,97 @@
+body{
+    margin: 0;
+    padding: 5px;
+    
+
+}
+
+abbr{
+    font-style: initial;
+}
+
+nav{
+    width: 70vw;
+    margin: auto;
+    border: solid 3px black;
+    border-radius: 10px;
+    padding: 5px;
+    
+}
+
+main {
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+} 
+
+
+/* SEÇÃO DA CALCULADORA DE IMPOSTOS */
+section.calculatorSect{
+    margin-top: 1rem;
+    font-size: larger;
+    background-color: rgb(43, 156, 156);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30vw;
+    padding: 15px;
+    border: solid 2px black;
+    border-radius: 10px;
+
+    & label{
+        text-align: center;
+        font-size: 2rem;
+    }
+    & #submitInput{
+        display: flex;
+        
+    }
+    
+    & input{
+        width: 190px;
+        height: 25px;
+    }
+
+    & small{
+        text-align: center;
+    }
+}
+
+#showResults{
+    border: solid 2px black;
+    border-radius: 10px;
+    width: 30vw;
+    padding: 15px;
+}
+
+/* SEÇÃO DE USUÁRIO */
+
+section.userConfigSect{
+    margin-top: 1rem;
+    padding: 10px;
+    border: solid 3px black;
+    border-radius: 10px;
+    width: 30vw;
+    height: 20vh;
+    display:  flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+select{
+    height: 4vh;
+    border-radius: 10px;
+}
+
+#saveUserBtn{
+    width: 60px;
+    padding: 5px;
+    background-color: green;
+  
+    font-weight: 600;
+    margin: auto;
+}
