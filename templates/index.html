@@ -23,7 +23,7 @@
         <form method="POST" action="/calcular">
           <label for="salario">Salário mensal (¥ - ienes)</label>
           <br />
-          <div id="submitInput">
+          
             <input
               type="number"
               id="salario"
@@ -33,8 +33,21 @@
               min="0"
               step="1"
             />
+
+                    <select name="cidade">
+            <option value="">Cidade</option>
+            <option value="tokyo">Tokyo</option>
+            <option value="osaka">Osaka</option>
+            <option value="kyoto">Kyoto</option>
+        </select>
+
+        <select name="visto">
+            <option value="">Tipo De Visto</option>
+            <option value="kosei">Kosei</option>
+            <option value="freelancer">Freelancer</option>
+        </select>
             <button type="submit">Calcular</button>
-          </div>
+          
 
           <small>Digite o valor bruto mensal em ienes</small>
         </form>
@@ -68,22 +81,7 @@
         </div>
       </section>
 
-      <section class="userConfigSect">
-
-        <select name="cidade">
-            <option value="tokyo">Tokyo</option>
-            <option value="osaka">Osaka</option>
-            <option value="kyoto">Kyoto</option>
-        </select>
-
-        <select name="visto">
-            <option value="kosei">Kosei</option>
-            <option value="freelancer">Freelancer</option>
-
-            
-        </select>
-        <button id="saveUserBtn">Salvar</button>
-      </section>
+     
     </main>
   </body>
 </html>
