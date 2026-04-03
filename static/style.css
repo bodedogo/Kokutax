@@ -30,7 +30,11 @@ main {
 section.calculatorSect{
     margin-top: 1rem;
     font-size: larger;
+<<<<<<< Updated upstream
    
+=======
+    background-color: rgb(43, 156, 156);
+>>>>>>> Stashed changes
 }
 
 form{
@@ -83,9 +87,24 @@ section.userConfigSect{
 }
 
 select{
+<<<<<<< Updated upstream
     height: 3vh;
     width:200px;
     border-radius: 10px;
     margin: 4px;
 }
 
+=======
+    height: 4vh;
+    border-radius: 10px;
+}
+
+#saveUserBtn{
+    width: 60px;
+    padding: 5px;
+    background-color: green;
+  
+    font-weight: 600;
+    margin: auto;
+}
+>>>>>>> Stashed changes
