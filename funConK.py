@@ -1,12 +1,12 @@
 from config import CIDADES, VISTOS
 
 
-def sa(sm: int):
+def sa(sm: int):#sm = salario mensal #sa = salario anual
     return sm * 12
 
 
-def eid(sm: int):
-    vsa = sa(sm)
+def eid(sm: int): #eid = employment income deduction dedução salarial
+    vsa = sa(sm) #vsa = valor do salario anual
     if vsa <= 1_900_000:
         return 650_000
     elif vsa <= 3_600_000:
@@ -20,20 +20,20 @@ def eid(sm: int):
 
 
 
-def prev(sm: int, visto: str):
+def prev(sm: int, visto: str):#prev = previdencia
     vsa = sa(sm)
     taxa = VISTOS[visto]["previdencia"]
     return int(vsa * taxa)
 
 
 
-def saude(sm: int, cidade: str):
+def saude(sm: int, cidade: str):#saude = plano de saude
     vsa = sa(sm)
     taxa = CIDADES[cidade]["saude"]
     return int(vsa * taxa)
 
 
-def bd(sm: int):
+def bd(sm: int):#basic deduction = dedução basica 2 dedução
     vsa = sa(sm)
 
     if vsa <= 24_000_000:
@@ -47,14 +47,14 @@ def bd(sm: int):
 
 
 
-def rt(sm: int, cidade: str, visto: str):
+def rt(sm: int, cidade: str, visto: str):#renda tributavel
     vsa = sa(sm)
     valor = vsa - eid(sm) - prev(sm, visto) - saude(sm, cidade) - bd(sm)
     return max(valor, 0)
 
 
 
-def imp(sm: int, cidade: str, visto: str):
+def imp(sm: int, cidade: str, visto: str):#imposto de renda nacional
     rtb = rt(sm, cidade, visto)
 
     if rtb < 1_000:
@@ -76,12 +76,12 @@ def imp(sm: int, cidade: str, visto: str):
 
     return max(imposto, 0)
 
-def resimp(sm: int, cidade: str, visto: str):
+def resimp(sm: int, cidade: str, visto: str):#imposto residencial
     base = rt(sm, cidade, visto)
     fixo = CIDADES[cidade]["residencial_fixo"]
     return int(base * 0.10 + fixo)
 
 
-def seg(sm: int):
+def seg(sm: int):#seguro desemprego
     vsa = sa(sm)
     return int(vsa * 0.006)

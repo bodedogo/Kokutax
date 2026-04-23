@@ -2,6 +2,6 @@ __pycache__/
 README.md
 *.pyc
 LICENSE
-
+venv/
 
 __pycache__/

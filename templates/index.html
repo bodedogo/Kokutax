@@ -54,7 +54,7 @@
         <br />
 
         <div id="showResults">
-          {% if salario_anual > 0 %}
+          {% if salario_anual is defined and salario_anual> 0 %}
           <h2>Resultados</h2>
 
           <p>
@@ -76,8 +76,12 @@
           <p>Imposto: {{ "{:,.2f}".format(imposto) }} ¥</p>
           <p>Imposto de residência: {{ "{:,.2f}".format(residencia) }} ¥</p>
           {% endif %} {% if erro %}
-          <p style="color: red">{{ erro }}</p>
+          <p style="color: rgb(204, 43, 43)">{{ erro }}</p>
+          {% if link %}
+          <a href="{{ link }}"
+          target="_blank">Clique aqui para ser redirecionado para um site do governo!</a>
           {% endif %}
+        {% endif %}
         </div>
       </section>
 

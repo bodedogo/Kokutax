@@ -23,7 +23,16 @@ def home():
 
 @app.route("/calcular", methods=["POST"])
 def calcular():
-    sm = int(request.form.get("salario") or 0)
+    salario_cru = request.form.get("salario") or ""
+    
+    salario_cru = salario_cru.replace(".", "").replace(",",".")
+    try:
+        sm = float(salario_cru)
+    except:
+        return render_template("index.html", erro="valor invalido")
+    if sm <= 95_000:
+        return render_template("index.html", erro="salario abaixo do minimo permitido! (95.000)",
+        link = "https://youtu.be/dQw4w9WgXcQ?si=AbdXcK7v8ncoeNfP")
 
     cidade = request.form.get("cidade") or "tokyo"
     visto = request.form.get("visto") or "kosei"
