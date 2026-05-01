@@ -23,11 +23,8 @@
   width: 50vw;
   position: absolute;
   z-index: 1;
- 
   margin: 400px;
   align-self: center;
-  
-
   padding: 10px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -39,9 +36,9 @@
   display: flex;
   margin-left: auto;
   background-color: #F4721E;
-  border: solid 1px var(--border);
+  border: solid 2px var(--border);
   border-radius: 5px;
-  color: #0f1115;
+  color: var(--card);
 }
 
 #header.fade{
@@ -114,6 +111,7 @@ header.fade{
   height: 300px;
 }
 
+
 /* GRAFICO */
 #grafico {
   height: 200px;
@@ -123,6 +121,7 @@ header.fade{
     rgba(244, 114, 30, 0.1)
   );
   border-radius: 12px;
+  align-items: center;
 }
 
 /* GASTOS */
@@ -150,19 +149,16 @@ header.fade{
 
 #lista-gastos::-webkit-scrollbar{
   background-color: #0f111500;
-  
 }
+
+
 
 #lista-gastos::-webkit-scrollbar-thumb{
   background-color: #5274b8;
   border-radius: 10px;
 }
 
-#lista-gastos::-webkit-scrollbar-button{
-  background-color: #e6e9ef;
-  background-color: #0f1115;
-  border-radius: 100%;
-}
+
 
 .gastos-area button:hover {
   background: #5c7397;
@@ -170,7 +166,7 @@ header.fade{
 
 
 
-#gasto {
+#lista-gastos li {
   list-style: none;
   padding: 10px;
   border-bottom: 1px solid var(--border);
@@ -178,11 +174,11 @@ header.fade{
   justify-content: space-between;
 }
 
-#gasto span {
+#lista-gastos span {
   color: var(--accent);
 }
 
-#remove-gastoBtn{
+#lista-gastos button{
   
   width: 30px;
   font-weight: bolder;

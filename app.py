@@ -20,6 +20,11 @@ def home():
         seguro_desemprego=0,
     )
 
+@app.route("/user")
+def user():
+    return render_template("user.html")
+
+
 
 @app.route("/calcular", methods=["POST"])
 def calcular():

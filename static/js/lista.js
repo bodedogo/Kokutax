@@ -1,6 +1,6 @@
 let addBtn = document.getElementById("addgastoBtn");
 let gastosArea = document.getElementById("detalhar-gastos-area");
-let submitGasto = document.getElementById("submitGasto");
+
 
 addBtn.addEventListener("click", () => {
   // PARTE DE FAZER ELE APARECER E DESAPERECER (E FICAR COM O FUNDO TRANSPARENTE)
@@ -19,26 +19,46 @@ close.addEventListener("click", () => {
   document.getElementById("content").classList.toggle("fade");
 });
 
-submitGasto.addEventListener("click", () => {
-    let nomeGasto = document.getElementById("nome-gasto").value;
-    let valorGasto = document.getElementById("valorGastoInput").value;
-    
-    console.log(nomeGasto, valorGasto)
+// ===== ELEMENTOS =====
+let lista = document.getElementById("lista-gastos");
+let submitGasto = document.getElementById("submitGasto");
 
+// ===== ESTADO =====
+let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
 
-});
+// ===== SALVAR =====
+function salvarGastos() {
+  localStorage.setItem("gastos", JSON.stringify(gastos));
+}
 
-const ctx = document.getElementById("myChart");
-new Chart(ctx, {
+// ===== RENDER LISTA =====
+function renderizarGastos() {
+  lista.innerHTML = "";
+
+  gastos.forEach((gasto) => {
+    let li = document.createElement("li");
+
+    li.innerHTML = `
+      ${gasto.nome} 
+      <span>R$ ${gasto.valor}</span>
+      <button class="remove-btn" data-id="${gasto.id}">-</button>
+    `;
+
+    lista.appendChild(li);
+  });
+}
+
+// ===== GRÁFICO =====
+let ctx = document.getElementById("myChart");
+
+let chart = new Chart(ctx, {
   type: "bar",
   data: {
-    // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-
+    labels: [],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
+        label: "Gráfico de Gastos",
+        data: [],
       },
     ],
   },
@@ -50,3 +70,55 @@ new Chart(ctx, {
     },
   },
 });
+
+// ===== ATUALIZAR GRÁFICO =====
+function atualizarGrafico() {
+  let labels = gastos.map((g) => g.nome);
+  let valores = gastos.map((g) => g.valor);
+
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = valores;
+
+  chart.update();
+}
+
+// ===== ADICIONAR GASTO =====
+submitGasto.addEventListener("click", () => {
+  let nomeGasto = document.getElementById("nome-gasto").value;
+  let valorGasto = document.getElementById("valorGastoInput").value;
+
+  if (!nomeGasto || !valorGasto) return;
+
+  let novoGasto = {
+    id: Date.now(),
+    nome: nomeGasto,
+    valor: Number(valorGasto),
+  };
+
+  gastos.push(novoGasto);
+
+  salvarGastos();
+  renderizarGastos();
+  atualizarGrafico();
+
+  // limpa inputs
+  document.getElementById("nome-gasto").value = "";
+  document.getElementById("valorGastoInput").value = "";
+});
+
+// ===== REMOVER GASTO =====
+lista.addEventListener("click", (event) => {
+  if (event.target.classList.contains("remove-btn")) {
+    let id = event.target.dataset.id;
+
+    gastos = gastos.filter((g) => g.id != id);
+
+    salvarGastos();
+    renderizarGastos();
+    atualizarGrafico();
+  }
+});
+
+// ===== INICIALIZAÇÃO =====
+renderizarGastos();
+atualizarGrafico();
