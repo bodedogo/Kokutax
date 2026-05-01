@@ -17,12 +17,45 @@
   --accent: #F4721E;
 }
 
+#detalhar-gastos-area{
+  display: none;
+  background-color: var(--card);
+  width: 50vw;
+  position: absolute;
+  z-index: 1;
+ 
+  margin: 400px;
+  align-self: center;
+  
+
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  opacity: 1; 
+  transition: 1s;
+}
+
+#fecha-area{
+  display: flex;
+  margin-left: auto;
+  background-color: #F4721E;
+  border: solid 1px var(--border);
+  border-radius: 5px;
+  color: #0f1115;
+}
+
+#header.fade{
+  opacity: 1;
+}
+
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
   display: flex;
+  opacity: 1;
 }
+
 
 /* SIDEBAR */
 #leftbar {
@@ -54,7 +87,17 @@ main {
   padding: 30px;
 }
 
+
+
 /* HEADER / CARDS */
+header{
+    transition: 1s;
+}
+header.fade{
+  opacity: 0.2;
+  transition: 1s;
+}
+
 .gerencia-gastos {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -101,13 +144,31 @@ main {
 
 #lista-gastos{
   padding: 10px;
-  height: 10vh;
+  height: 14vh;
   overflow-y: scroll;
+}
+
+#lista-gastos::-webkit-scrollbar{
+  background-color: #0f111500;
+  
+}
+
+#lista-gastos::-webkit-scrollbar-thumb{
+  background-color: #5274b8;
+  border-radius: 10px;
+}
+
+#lista-gastos::-webkit-scrollbar-button{
+  background-color: #e6e9ef;
+  background-color: #0f1115;
+  border-radius: 100%;
 }
 
 .gastos-area button:hover {
   background: #5c7397;
 }
+
+
 
 #gasto {
   list-style: none;
@@ -136,7 +197,13 @@ main {
 #content {
   margin-top: 30px;
   margin: auto;
+    transition: 1s;
 
+}
+
+#content.fade{
+  opacity: 0.2;
+  transition: 1s;
 }
 
 /* CALCULADORA */
