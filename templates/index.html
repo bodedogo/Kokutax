@@ -5,25 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kokutax|Home</title>
 
-    <link
+    <!-- <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
-    />
-    <link rel="stylesheet" href="style.css" />
+    /> -->
+
+    <link rel="stylesheet" href="../static/css/style.css" />
   </head>
 
-  <body>
-    <nav>
-      <h2>KOKUTAX</h2>
+  <body class="light">
+    <nav id="leftbar">
+      <a href="user.html">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+        >
+          <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
+          <circle cx="12" cy="11" r="4" />
+          <circle cx="12" cy="12" r="10" />
+        </svg>
+      </a>
+
+      <a id="theme" href="#">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-palette-icon lucide-palette"
+        >
+          <path
+            d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"
+          />
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+        </svg>
+      </a>
     </nav>
 
-    <main>
+    <br />
 
-      <section class="calculatorSect">
-        <form method="POST" action="/calcular">
-          <label for="salario">Salário mensal (¥ - ienes)</label>
-          <br />
+    <main>
+      <header>
+        <h2 id="greetings"></h2>
+        <div class="gerencia-gastos">
+          <!-- Seção de Gráficos \/ -->
+          <div class="grafico-area">
+            <div id="grafico">
           
+                  <canvas id="myChart"></canvas>
+
+
+              <!-- Aqui onde vou inserir os gráficos com js -->
+            </div>
+          </div>
+          <!-- Seção de Gráficos ^ -->
+
+          <!-- Seção de Gastos: -->
+          <div class="gastos-area">
+            <h2 align="center">Gerenciamento de Gastos:</h2>
+            <button id="addgastoBtn">Adicionar Gasto +</button>
+            <ul id="lista-gastos">
+              <li id="gasto">
+                Carteira de motorista <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+              <li id="gasto">
+                Carteira de motorista: <span id="valorGasto">5200Y</span>
+                <button id="remove-gastoBtn">-</button>
+              </li>
+            </ul>
+          </div>
+          <!-- Fim da Seção de gastos -->
+        </div>
+      </header>
+      <br />
+
+      <div id="content">
+        <section class="calculatorSect">
+          <form method="POST" action="/calcular">
+            <label for="salario">Salário mensal (¥ - ienes)</label>
+            <small>Digite o valor bruto mensal em ienes</small>
+            <br />
+
             <input
               type="number"
               id="salario"
@@ -34,64 +133,89 @@
               step="1"
             />
 
-                    <select name="cidade">
-            <option value="">Cidade</option>
-            <option value="Tokyo">Tokyo</option>
-            <option value="Osaka">Osaka</option>
-            <option value="Kyoto">Kyoto</option>
-            <option value="Yokohama">Yokohama</option>
-            <option value="Nagoya">Nagoya</option>
-            <option value="Sapporo">Sapporo</option>
-        </select>
+            <select name="cidade" required>
+              <option value="">Cidade</option>
+              <option value="Tokyo">Tokyo</option>
+              <option value="Osaka">Osaka</option>
+              <option value="Kyoto">Kyoto</option>
+              <option value="Yokohama">Yokohama</option>
+              <option value="Nagoya">Nagoya</option>
+              <option value="Sapporo">Sapporo</option>
+            </select>
 
-        <select name="visto">
-            <option value="">Tipo De Visto</option>
-            <option value="Kosei">Kosei</option>
-            <option value="Autonomo">Freelancer</option>
-            <option value="Estudante">Estudante</option>
-            <option value="Dependente">Dependente</option>
-            <option value="Residente_Permanente">Residente Permanenente</option>
-        </select>
+            <select name="visto" required>
+              <option value="">Tipo De Visto</option>
+              <option value="Kosei">Kosei</option>
+              <option value="Autonomo">Freelancer</option>
+              <option value="Estudante">Estudante</option>
+              <option value="Dependente">Dependente</option>
+              <option value="Residente_Permanente">
+                Residente Permanenente
+              </option>
+            </select>
             <button type="submit">Calcular</button>
-          
+          </form>
 
-          <small>Digite o valor bruto mensal em ienes</small>
-        </form>
-        <br />
+          <div id="showResults">
+            {% if salario_anual is defined and salario_anual> 0 %}
 
-        <div id="showResults">
-          {% if salario_anual is defined and salario_anual> 0 %}
-          <h2>Resultados</h2>
+            <h2 align="center" margin="5px">Resultados:</h2>
+            <p>
+              <abbr title="Seu salário mensal x 12">Salário anual</abbr>: {{
+              "{:,.2f}".format(salario_anual) }} ¥
+            </p>
+            <p>Dedução do salário: {{ "{:,.2f}".format(deducao_salario) }} ¥</p>
+            <p>
+              Salário após dedução: {{ "{:,.2f}".format(salario_apos_deducao) }}
+              ¥
+            </p>
 
-          <p>
-            <abbr title="Seu salário mensal x 12">Salário anual</abbr>: {{
-            "{:,.2f}".format(salario_anual) }} ¥
-          </p>
-          <p>Dedução do salário: {{ "{:,.2f}".format(deducao_salario) }} ¥</p>
-          <p>
-            Salário após dedução: {{ "{:,.2f}".format(salario_apos_deducao) }} ¥
-          </p>
+            <p>Previdência: {{ "{:,.2f}".format(previdencia) }} ¥</p>
+            <p>Seguro de saúde: {{ "{:,.2f}".format(seguro_de_saude) }} ¥</p>
+            <p>
+              Seguro desemprego: {{ "{:,.2f}".format(seguro_desemprego) }} ¥
+            </p>
 
-          <p>Previdência: {{ "{:,.2f}".format(previdencia) }} ¥</p>
-          <p>Seguro de saúde: {{ "{:,.2f}".format(seguro_de_saude) }} ¥</p>
-          <p>Seguro desemprego: {{ "{:,.2f}".format(seguro_desemprego) }} ¥</p>
+            <p>Dedução básica: {{ "{:,.2f}".format(deducao_basica) }} ¥</p>
+            <p>Renda tributável: {{ "{:,.2f}".format(renda_tributavel) }} ¥</p>
 
-          <p>Dedução básica: {{ "{:,.2f}".format(deducao_basica) }} ¥</p>
-          <p>Renda tributável: {{ "{:,.2f}".format(renda_tributavel) }} ¥</p>
-
-          <p>Imposto: {{ "{:,.2f}".format(imposto) }} ¥</p>
-          <p>Imposto de residência: {{ "{:,.2f}".format(residencia) }} ¥</p>
-          {% endif %} {% if erro %}
-          <p style="color: rgb(204, 43, 43)">{{ erro }}</p>
-          {% if link %}
-          <a href="{{ link }}"
-          target="_blank">Clique aqui para ser redirecionado para um site do governo!</a>
-          {% endif %}
-        {% endif %}
-        </div>
-      </section>
-
-     
+            <p>Imposto: {{ "{:,.2f}".format(imposto) }} ¥</p>
+            <p>Imposto de residência: {{ "{:,.2f}".format(residencia) }} ¥</p>
+            {% endif %} {% if erro %}
+            <p style="color: rgb(204, 43, 43)">{{ erro }}</p>
+            {% if link %}
+            <a href="{{ link }}" target="_blank"
+              >Clique aqui para ser redirecionado para um site do governo!</a
+            >
+            {% endif %} {% endif %}
+          </div>
+        </section>
+      </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('myChart');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels:[],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
   </body>
+  
 </html>

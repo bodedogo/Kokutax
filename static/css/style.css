@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --bg: #0f1115;
+  --card: #151922;
+  --border: #232938;
+  --text: #e6e9ef;
+  --muted: #9aa4b2;
+  --primary: #4D6080;
+  --accent: #F4721E;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+}
+
+/* SIDEBAR */
+#leftbar {
+  width: 70px;
+  height: 100vh;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  gap: 20px;
+  position: fixed;
+}
+
+#leftbar a {
+  color: var(--muted);
+  transition: 0.2s;
+}
+
+#leftbar a:hover {
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+/* MAIN */
+main {
+  margin-left: 70px;
+  width: 100%;
+  padding: 30px;
+}
+
+/* HEADER / CARDS */
+.gerencia-gastos {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* CARD PADRÃO */
+.grafico-area,
+.gastos-area {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  height: 300px;
+}
+
+/* GRAFICO */
+#grafico {
+  height: 200px;
+  background: linear-gradient(
+    135deg,
+    rgba(77, 96, 128, 0.2),
+    rgba(244, 114, 30, 0.1)
+  );
+  border-radius: 12px;
+}
+
+/* GASTOS */
+.gastos-area h2 {
+  margin-bottom: 15px;
+}
+
+#addgastoBtn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.2s;
+}
+
+#lista-gastos{
+  padding: 10px;
+  height: 10vh;
+  overflow-y: scroll;
+}
+
+.gastos-area button:hover {
+  background: #5c7397;
+}
+
+#gasto {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+}
+
+#gasto span {
+  color: var(--accent);
+}
+
+#remove-gastoBtn{
+  
+  width: 30px;
+  font-weight: bolder;
+  height: 25px;
+  background-color: #ff8a3d;
+  color: #232938;
+  border: solid 1px #232938;
+  border-radius: 4px;
+}
+
+/* CONTENT */
+#content {
+  margin-top: 30px;
+  margin: auto;
+
+}
+
+/* CALCULADORA */
+.calculatorSect {
+  display: flex;
+  gap: 20px;
+
+  max-width: 900px;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin: auto;
+}
+
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+label {
+  font-weight: 500;
+}
+
+small {
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+/* INPUTS */
+input,
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0d1016;
+  color: var(--text);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+}
+
+/* BOTÃO */
+form button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+form button:hover {
+  background: #ff8a3d;
+}
+
+/* RESULTADOS */
+#showResults {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+#showResults p {
+  margin-bottom: 6px;
+}
