@@ -1,4 +1,8 @@
-from funConK import seg, imp, saude, prev, eid, bd, rt, resimp
+from funConK import (seguro, imposto as calc_imposto, saude, previdencia as calc_previdencia,
+                     deducao_inicial, deducao_secundaria as calc_deducao_secundaria,
+                     renda_tributavel as calc_renda_tributavel, salario_anual as calc_salario_anual,
+                     imposto_residencial, salario_depois_deducao,
+                     salario_pos_impostos_extras as calc_salario_pos)
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -22,6 +26,7 @@ def home():
 
 @app.route("/user")
 def user():
+
     return render_template("user.html")
 
 
@@ -29,47 +34,52 @@ def user():
 @app.route("/calcular", methods=["POST"])
 def calcular():
     salario_cru = request.form.get("salario") or ""
-    
-    salario_cru = salario_cru.replace(".", "").replace(",",".")
+
+    salario_cru = salario_cru.replace(".", "").replace(",", ".")
     try:
-        sm = float(salario_cru)
-    except:
-        return render_template("index.html", erro="valor invalido")
-    if sm <= 95_000:
-        return render_template("index.html", erro="salario abaixo do minimo permitido! (95.000)",
-        link = "https://youtu.be/dQw4w9WgXcQ?si=AbdXcK7v8ncoeNfP")
+        salario_mensal = float(salario_cru)
+    except ValueError:
+        return render_template("index.html", erro="Valor inválido.")
+
+    if salario_mensal <= 95_000 or "":
+        return render_template(
+            "index.html",
+            erro="Salário abaixo do mínimo permitido! (95.000)",
+            link="https://youtu.be/dQw4w9WgXcQ?si=AbdXcK7v8ncoeNfP",
+        )
 
     cidade = request.form.get("cidade") or "tokyo"
-    visto = request.form.get("visto") or "kosei"
+    visto  = request.form.get("visto")  or "kosei"
 
-    salario_anual = sm * 12
-    deducao_salario = eid(sm)
-    salario_apos_deducao = salario_anual - deducao_salario
+    valor_salario        = calc_salario_anual(salario_mensal)
+    deducao_salario      = deducao_inicial(valor_salario)
+    deducao_basica       = calc_deducao_secundaria(valor_salario)
+    salario_apos_deducao = salario_depois_deducao(valor_salario, deducao_salario, deducao_basica)
 
-    previdencia = prev(sm, visto)
-    seguro_de_saude = saude(sm, cidade)
-    seguro_desemprego = seg(sm)
+    valor_previdencia = calc_previdencia(salario_apos_deducao, visto)
+    seguro_de_saude   = saude(salario_apos_deducao, cidade)
+    seguro_desemprego    = seguro(valor_salario)
 
-    deducao_basica = bd(sm)
-    renda_tributavel = rt(sm, cidade, visto)
+    base_tributavel      = calc_salario_pos(salario_apos_deducao, valor_previdencia, seguro_de_saude)
+    valor_renda_trib     = calc_renda_tributavel(base_tributavel)
 
-    imposto = imp(sm, cidade, visto)
-    residencia = resimp(sm, cidade, visto)
+    valor_imposto        = calc_imposto(valor_renda_trib, cidade, visto)
+    residencia           = imposto_residencial(valor_renda_trib, cidade, visto)
 
     return render_template(
         "index.html",
-        salario_anual=salario_anual,
+        salario_anual=valor_salario,
         deducao_salario=deducao_salario,
         salario_apos_deducao=salario_apos_deducao,
-        previdencia=previdencia,
+        previdencia=valor_previdencia,
         seguro_de_saude=seguro_de_saude,
         seguro_desemprego=seguro_desemprego,
         deducao_basica=deducao_basica,
-        renda_tributavel=renda_tributavel,
-        imposto=imposto,
+        renda_tributavel=valor_renda_trib,
+        imposto=valor_imposto,
         residencia=residencia,
     )
 
 
-
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)

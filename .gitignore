@@ -3,5 +3,5 @@ README.md
 *.pyc
 LICENSE
 venv/
-
+teste.py
 __pycache__/
